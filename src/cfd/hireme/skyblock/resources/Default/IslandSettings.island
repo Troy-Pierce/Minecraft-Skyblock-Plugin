@@ -1,0 +1,31 @@
+> Item display is the item that is displayed in the creation menu for the item
+> Item title is the title (Supports color codes)
+> Item enchanted is if the item has the enchanted shining effect
+> Item lore is the items lore (Supports color codes)
+> Island id pairs the item shown in creation menu to the actual world file (can be any integer, but CANNOT repeat with another islands id such as two islands having the id of 3)
+> Island Displayed is if the island is displayed in the creation menu
+> If "island-require-perm" is enabled, the user must have the permission "dskyblock.islands.<ISLAND-ID>" to view the
+> island in the Island creation menu
+
+> DO NOT! have spaces after the :
+> Bad Example:
+> island-id: 1
+> Correct Example:
+> island-id:1
+
+> WORK IN PROGRESS-WIP:
+> island-buyable is whether or not the island can be bought, the island will be locked until purchased
+> island-cost is how much the island costs if island-buyable is true, value type: double ($5354.23)
+> if island-require-perm is enabled, then the user must have the island permission to be able to buy the island
+
+item-display:OAK_SAPLING
+item-title:"&r&fDefault Island"
+item-enchanted:False
+item-lore:["&eThis is the default island","","&a(!) Click to create this island!"]
+island-id:1
+island-displayed:True
+
+island-require-perm:False
+
+island-buyable:False
+island-cost:1000.0

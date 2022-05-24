@@ -1,0 +1,277 @@
+# SECTION: SKYBLOCK RESET
+# COMING SOON
+# a reset is:
+# islands such as worlds, island configuration, challenges will be reset and completely wiped
+# player configuration, such as their balance (economy), islands, ect.. will be completely wiped
+# all skyblock data will completely reset as if the plugin was just recently installed
+# A reset requires 3 processes to verify a complete wipe, these MUST be completed in the listed order:
+
+
+# SECTION: ECONOMY
+# Plugin has a built in economy but also supports Essentials economy
+# If you use Essentials Economy, disable "Primary.economy.skyblock_economy" and enable "Primary.economy.essentials_economy"
+# You may also disable skyblock economy completely by having "primary.economy.ECONOMY_DISABLED" set to false
+# SECTION: SCOREBOARD
+# Plugin contains a built in scoreboard that shows balance, island information
+# If the player does not have an island, the scoreboard will show the command to create an island
+# scores can be added or removed
+# anything with {} is a variable and is changed
+# {MAX_MEMBER_COUNT} is changed to how many members an island can have
+# =NUMBER is the number the score will have
+# the number determines the position of the score
+# a lower score is at the bottom, while a higher score is at the top
+# scoreboard.ip_score {SERVER_IP} can be changed to a hostname such as mc.server.net
+# I will happily add any extra variables if needed
+# SECTION: GENERATOR
+# Plugin has a built in custom cobblestone generator
+# if enabled, cobblestone generators will have a chance to spawn ores instead of cobble such as diamond, iron, coal, redstone ores 
+Primary:
+  Garbage_Collection:
+    notify: true
+  economy:
+    ECONOMY_DISABLED: false
+    skyblock_economy: true
+    essentials_economy: false
+    symbol: "$"
+  scoreboard:
+    enabled: true
+    show_ip: true
+    header: "&b&lSkyBlock"
+Primary:
+  economy:
+    ECONOMY_DISABLED: false
+    skyblock_economy: true
+    essentials_economy: false
+    symbol: "$"
+  scoreboard:
+    enabled: true
+    show_ip: true
+    header: "&b&lSkyBlock"
+    ip_score:
+    - "=1"
+    - "&6&L{SERVER_IP}=0"
+    no_island_scores:
+    - "&fIsland=4"
+    - "  &7Island Menu=3"
+    - "    &7/island=2"
+    island_scores:
+    - "&fIsland=5"
+    - "  &7Members: &e{MEMBER_COUNT}/{MAX_MEMBER_COUNT}=4"
+    - "  &7Visitors: &e{VISITOR_COUNT}/{MAX_VISITOR_COUNT}=3"
+    - "  &7Island Level: &e{ISLAND_LEVEL}=2"
+    player_scores:
+    - "=9"
+    - "&f{PLAYER_NAME}=8"
+    - "  &7Balance:&e {SYMBOL}{BALANCE}=7"
+    - "  &7Online: &e{ONLINE}=6"
+  shop:
+    enabled: true
+  generator:
+    enabled: true
+    blocks:
+    - DIAMOND_ORE:10.0
+    - GOLD_ORE:50.0
+    - IRON_ORE:10.0
+    - COAL_ORE:100.0
+    - LAPIS_ORE:50.0
+    - EMERALD_ORE:10.0
+    - COBBLESTONE:400.0
+
+# SECTION: GUI
+# island_gui.show_locked_islands, if set to true, players will see a locked island, but the
+# display item will be a barrier with a LOCKED lore
+# If set to false, will not appear in the island creation menu
+island_gui:
+  show_locked_islands: true
+
+# SECTION: ISLAND DEFAULTS
+# Max_members can be upgraded, 3 is just the starting number
+# increase_by is how much an islands max members increases by per level
+# a level 1 island would have a maximum count of 3 members,
+# a level 2 island would have a maximum count of 4 members
+# custom_island_welcome is whether or not players can set their own custom welcome message
+# that is shown to players when they enter the island, if set to false, no message will be displayed
+# permission is dskyblock.island.setwelcome
+# SECTION: UPGRADES
+
+island_settings:
+  max_members: 3
+  max_visitors: 7
+  upgrades:
+    border:
+      level_requirement: 20
+      cost: 2500.0
+    member:
+      level_requirement: 20
+      cost: 2500.0
+    visitor:
+      level_requirement: 20
+      cost: 2500.0
+  custom_island_welcome:
+    enabled: true
+    require_perm: false
+
+
+# SECTION: DEFAULT TEMPLATE
+# Whether or not the default island template will be copied to plugins\Skyblock\Templates
+# For storage reasons and if you do not wish to use the default template
+templates:
+  Default: true
+  Winter: true
+
+# SECTION: SPAWN
+# This is the world that a user is teleported to if they are kicked from an island
+# if not set, then the user will be teleported to the first world loaded worlds.get(0)
+spawn_world_name: WORLDNAME
+
+# SECTION: BLOCK LEVEL VALUE
+# how much a certain block will add to an islands level
+# DEFAULT is how much is added if the block is not in the list, and also not air
+# a OAK_LOG would equal a value of 0.01
+# Final level is an integer, decimal is removed and the whole number is taken as the level
+# 0.05 = level 0 | 0.6 = level 0 | 1.4 = level 1
+block_values:
+- DIAMOND_BLOCK:0.5
+- EMERALD_BLOCK:0.4
+- GOLD_BLOCK:0.3
+- IRON_BLOCK:0.2
+- LAPIS_BLOCK:0.05
+- COAL_BLOCK:0.05
+- DEFAULT:0.01
+
+# SECTION: SHOP
+# Sections can be added and customized, their material is shown in the gui for the section
+# Section example: Shop.Blocks, Blocks is the title of the inventory and section
+# Restricted option:
+# Example: Shop.Blocks.restricted
+# if set to true, the player will only be able to view, buy, and sell in the section
+# must have the permission "dskyblock.shop.<SECTION_NAME>
+# So Shop.Blocks, a player must have the permission "dskyblock.shop.Blocks", if 
+# Shop.Blocks.restricted is set to true
+# Items can be added, removed, or edited
+# Item Example: Shop.Blocks.0, 0 is just a place holder, it can be anything such as integers or a word such as 
+# grass, however, Items CANNOT have the name of "restricted", "material", "lore"
+# as those 3 names are already used for the sections config, and will not be registered
+# if they do have those names
+# an items material is what is given to the player and shown in the gui
+# cost must be a double and is much the item is valued at
+# sell is what the player will be given.
+# sell can be 0
+Shop:
+  show_restricted: true
+  Blocks:
+    restricted: false
+    material: GRASS_BLOCK
+    lore:
+    - "&eBuilding Blocks"
+    0:
+      material: GRASS_BLOCK
+      cost: 100.0
+      sell: 50.0
+    1:
+      material: STONE
+      cost: 30.0
+      sell: 15.0
+    2:
+      material: COBBLESTONE
+      cost: 15.0
+      sell: 7.5
+    3:
+      material: SNOW_BLOCK
+      cost: 5.0
+      sell: 2.5
+    4:
+      material: OAK_PLANKS
+      cost: 15.0
+      sell: 7.5
+    5:
+      material: OAK_LOG
+      cost: 60.0
+      sell: 10.0
+  Farming:
+    restricted: false
+    material: IRON_HOE
+    lore:
+    - "&eFarming Supplies"
+    0:
+      material: WHEAT_SEEDS
+      cost: 25.0
+      sell: 12.5
+    1:
+      material: BEETROOT_SEEDS
+      cost: 25.0
+      sell: 12.5
+    2:
+      material: MELON_SEEDS
+      cost: 30.0
+      sell: 15.0
+    3:
+      material: PUMPKIN_SEEDS
+      cost: 30.0
+      sell: 15.0
+    4:
+      material: OAK_SAPLING
+      cost: 30
+      sell: 5
+    5:
+      material: BIRCH_SAPLING
+      cost: 30
+      sell: 5
+
+# SECTION: CHALLENGES
+# 3 types: 
+# SLAY: Kill the certain mob
+# COLLECT: Have item added to inventory
+# MINE: Destroy the certain block
+# 2 types of rewards:
+# MONEY: Money given to player
+# MATERIAL: Item given to player
+# Name is what is shown in the gui
+# does not support color codes
+# Challenge names cannot repeat, as this is how they are seperated
+
+Challenges:
+  0:
+    display: IRON_PICKAXE
+    name: Miner
+    type: MINE
+    material: COBBLESTONE
+    amount: 250
+    reward_type: MONEY
+    reward: 1000.0
+  1:
+    display: IRON_SWORD
+    name: Hunter
+    type: SLAY
+    mob: ZOMBIE
+    amount: 50
+    reward_type: MATERIAL
+    reward: DIAMOND:4
+  2:
+    display: WHEAT
+    name: Farmer
+    type: MINE
+    material: WHEAT
+    amount: 25
+    reward_type: MONEY
+    reward: 520.0
+  3:
+    display: STONE
+    name: Expansionist
+    type: ISLAND_LEVEL
+    level: 100
+    reward_type: MONEY
+    reward: 5000.0
+
+
+
+
+
+
+
+
+
+
+
+
+

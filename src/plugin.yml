@@ -1,0 +1,15 @@
+name: "Skyblock"
+version: r.1.0.0
+author: Derpy
+main: cfd.hireme.skyblock.Skyblock
+description: Skyblock Plugin
+api-version: 1.14
+softdepend: [Essentials]
+commands:
+  island:
+    description: Island
+    usage: Island
+    aliases: [is]
+  test:
+    description: debug
+    usage: SPAWN
